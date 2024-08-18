@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        h1 {
+            color: brown;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            margin-left: 50px;
+        }
+
+        .input {
+            margin-bottom: 5px;
+            padding: 3px;
+        }
+
+        .answer {
+            color: brown;
+            margin-top: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculating the velocity of the ball</h1>
+
+    <div class="container">
+        <input class="input" id="vf" type="text" placeholder="Enter Vf in m/s">
+        <input class="input" id="vi" type="text" placeholder="Enter Vi in m/s">
+        <input class="input" id="tf" type="text" placeholder="Enter Tf in s">
+        <input class="input" id="ti" type="text" placeholder="Enter Ti in s">
+        <input class="input" id="btn" type="submit" value="calculate">
+    </div>
+
+    <script>
+        // Defining variables
+        let finalVelocity = document.getElementById("vf");
+        let initVelicity = document.getElementById("vi");
+        let finalTime = document.getElementById("tf");
+        let initTime = document.getElementById("ti");
+        let btn = document.getElementById("btn");
+
+
+        // Defining a function that calculates the final velocity
+        function calcVelocity() {
+            // function varables
+            let vf = finalVelocity.value;
+            let vi = initVelicity.value;
+            let ti = initTime.value;
+            let tf = finalTime.value;
+            let g = 9.81
+
+           if (vf === "" && vi === "" && tf === "" && ti == "") {
+            alert("write something")
+           } else {
+                let Vf = parseFloat(vf)
+                let Vi = parseFloat(vi)
+                let Tf = parseFloat(tf)
+                let Ti = parseFloat(ti)
+
+                if (vf === "") {
+                    Vf = Vi + g * (Tf-Ti)
+                    Vf = Vf.toFixed(3)
+                    let answer = document.createElement("h4")
+                    answer.classList.add("answer")
+                    answer.innerText = `The vinal velocity is ${Vf} m/s`
+                    document.body.appendChild(answer)
+
+                } else if (vi === "") {
+                    Vi = Vf - g * (Tf-Ti)
+                    Vi = Vi.toFixed(3)
+                    let answer = document.createElement("h4")
+                    answer.classList.add("answer")
+                    answer.innerText = `The initial velocity is ${Vi} m/s`
+                    document.body.appendChild(answer)
+
+                } else if (tf === "") {
+                    Tf = ((Vf-Vi)/g) + Ti
+                    Tf = Tf.toFixed(3)
+                    let answer = document.createElement("h4")
+                    answer.classList.add("answer")
+                    answer.innerText = `The final time is ${Tf} seconds`
+                    document.body.appendChild(answer)
+
+                } else if (ti === "") {
+                    Ti = Tf-((Vf-Vi)/g)
+                    Ti = Ti.toFixed(3)
+                    let answer = document.createElement("h4")
+                    answer.classList.add("answer")
+                    answer.innerText = `The initial time is ${Ti} seconds`
+                    document.body.appendChild(answer)
+                }
+           } 
+
+        };
+
+        btn.addEventListener("click", calcVelocity)
+    </script>
+
+
+</body>
+</html>
